@@ -1,0 +1,26 @@
+//Table Test, Name = string, Age = int
+/*
+`CREATE TABLE albums (
+    album_id INT AUTO_INCREMENT,
+    album_name VARCHAR(255) NOT NULL,
+    artist_last_name VARCHAR(255) NOT NULL,
+    artist_first_name VARCHAR(255) NOT NULL,
+    release_date DATE,
+    avg_rating FLOAT,
+    num_rating INT,
+    PRIMARY KEY (album_id)
+);`
+*/
+
+/*
+`CREATE TABLE artists (
+    artist_id INT AUTO_INCREMENT,
+    last_name VARCHAR(255) NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    birthday DATE,
+    location VARCHAR(255) NOT NULL,
+    avg_rating FLOAT,
+    num_rating INT,
+    PRIMARY KEY (artist_id)
+);`
+*/
