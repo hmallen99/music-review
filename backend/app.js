@@ -1,42 +1,56 @@
-const http = require('http');
-var mysql = require('mysql');
-const fs = require('fs');
+// Modules
+var express = require('express');
+var query = require('./query');
+var cors = require('cors');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+//Module set-up
 
-var text = fs.readFileSync('database_info.txt');
-var credentials = text.toString().split("\r\n");
+var sqlServer = new query.myQuery();
 
-var con = mysql.createConnection({
-    host: credentials[0],
-    user: credentials[1],
-    password: credentials[2],
-    database: credentials[3]
-});
+var app = express();
+
+app.use(cors());
+app.use(express.json());
+app.get('/', function (req, res) {
+    res.send('Hello World');
+})
+
+app.get('/abcd', function (req, res) {
+    sqlServer.getQuery(
+        function(result) {
+            res.send('testing123');
+        }
+    )
+    //res.send('abracadabra');
+})
+
+app.get('/delete', function (req, res) {
+    sqlServer.deleteColumn(
+        function(result) {
+            console.log(result);
+        }
+    )
+})
+
+app.post('/add_artist', function (req, res) {
+    console.log(req.body.name);
+})
 
 //tables: (also in databse_info.txt)
 //albums
 //artists
+function getData() {
+    sqlServer.getQuery(
+        function(result) {
+            console.log(result);
+        }
+    );
+}
 
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-    var sql = `
-        SELECT * FROM artists;
-    `;
-    con.query(sql, function(err, result) {
-        if (err) throw err;
-        console.log(result);
-    })
-});
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
-});
+var server = app.listen(9000, function () {
+    var host = server.address().address;
+    var port = server.address().port;
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+    console.log("Server running at localhost:%s", port);
+})

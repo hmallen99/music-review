@@ -1,0 +1,53 @@
+exports.myQuery = class Query {
+    constructor() {
+        var mysql = require('mysql');
+        const fs = require('fs');
+        var outData;
+        var text = fs.readFileSync('database_info.txt');
+        var credentials = text.toString().split("\r\n");
+        this.con = mysql.createConnection({
+            host: credentials[0],
+            user: credentials[1],
+            password: credentials[2],
+            database: credentials[3]
+        });
+    }
+
+    getQuery(callback) {
+        var sql = `
+            SELECT * FROM artists;
+        `;
+
+        this.con.query(sql, function(err, result) {
+            if (err) throw err;
+            return callback(result);
+        });
+    }
+
+    deleteColumn(callback) {
+        var sql = 'ALTER TABLE artists ADD artist_name VARCHAR(255)';
+        this.con.query(sql, function(err, result) {
+            if (err) throw err;
+            return callback(result);
+        })
+    }
+
+    addArtist(artistName, birthday, location) {
+        var artistInsertColumns = `INSERT INTO artists(
+            artist_name,
+            birthday,
+            location
+        )`;
+        var artistInsertValues = `Values (`.concat(
+            '"', artistName, '",',
+            '"', birthday, '",',
+            '"', location, '"',
+            ');'
+        );
+        var artistInsertQuery = artistInsertColumns.concat(artistInsertValues);
+        this.con.query(artistInsertQuery, function(err) {
+            if (err) throw err;
+            console.log("added artist");
+        });
+    }
+}
