@@ -25,7 +25,7 @@ exports.myQuery = class Query {
     }
 
     deleteColumn(callback) {
-        var sql = 'ALTER TABLE artists ADD artist_name VARCHAR(255)';
+        var sql = 'DELETE FROM artists';
         this.con.query(sql, function(err, result) {
             if (err) throw err;
             return callback(result);
@@ -49,5 +49,24 @@ exports.myQuery = class Query {
             if (err) throw err;
             console.log("added artist");
         });
+    }
+
+    addAlbum(albumName, artistName, releaseDate) {
+        var albumInsertColumns = `Insert INTO albums(
+            album_name,
+            artist_name,
+            release_date
+        )`;
+        var albumInsertValues = `Values (`.concat(
+            '"', albumName, '",',
+            '"', artistName, '",',
+            '"', releaseDate, '"',
+            ');'
+        );
+        var albumInsertQuery = albumInsertColumns.concat(albumInsertValues);
+        this.con.query(albumInsertQuery, function(err) {
+            if (err) throw err;
+            console.log("added album");
+        })
     }
 }

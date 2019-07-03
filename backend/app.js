@@ -8,20 +8,19 @@ var cors = require('cors');
 var sqlServer = new query.myQuery();
 
 var app = express();
-
 app.use(cors());
 app.use(express.json());
+
 app.get('/', function (req, res) {
-    res.send('Hello World');
+    res.send('Welcome!');
 })
 
-app.get('/abcd', function (req, res) {
+app.get('/list_artists', function (req, res) {
     sqlServer.getQuery(
         function(result) {
-            res.send('testing123');
+            res.send(result[0].artist_name);
         }
     )
-    //res.send('abracadabra');
 })
 
 app.get('/delete', function (req, res) {
@@ -32,8 +31,20 @@ app.get('/delete', function (req, res) {
     )
 })
 
+app.post('/add_album', function (req, res) {
+    console.log(req.body.album);
+    var albumName = req.body.album;
+    var artistName = req.body.name;
+    var releaseDate = req.body.date;
+    sqlServer.addAlbum(albumName, artistName, releaseDate);
+})
+
 app.post('/add_artist', function (req, res) {
     console.log(req.body.name);
+    artistName = req.body.name;
+    artistBirthday = req.body.bday;
+    artistLocation = req.body.location;
+    sqlServer.addArtist(artistName, artistBirthday, artistLocation);
 })
 
 //tables: (also in databse_info.txt)
