@@ -16,7 +16,11 @@ app.get('/', function (req, res) {
 })
 
 app.get('/list_artists', function (req, res) {
+    var sql = `
+        SELECT * FROM artists;
+    `;
     sqlServer.getQuery(
+        sql,
         function(result) {
             res.send(result[0].artist_name);
         }
@@ -37,6 +41,22 @@ app.post('/add_album', function (req, res) {
     var artistName = req.body.name;
     var releaseDate = req.body.date;
     sqlServer.addAlbum(albumName, artistName, releaseDate);
+})
+
+app.post('/search_artists', function (req, res) {
+    var search = req.body.search;
+    console.log(search);
+    var sql = `
+        SELECT * FROM artists
+        WHERE artist_name LIKE '%` + search + `%'
+    `;
+    sqlServer.getQuery(
+        sql,
+        function(result) {
+            res.send(JSON.stringify(result));
+            console.log(JSON.stringify(result));
+        }
+    )
 })
 
 app.post('/add_artist', function (req, res) {

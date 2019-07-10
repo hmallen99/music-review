@@ -4,6 +4,7 @@ import './App.css';
 import BackendAPI from './BackendAPI';
 import Home from './pages/Home';
 import InputArtist from './pages/InputArtist';
+import ArtistPage from './pages/ArtistPage';
 
 class App extends Component {
     constructor(props) {
@@ -12,8 +13,9 @@ class App extends Component {
             page: <Home />
         };
         this.pages = {
-            "home" : <Home />,
-            "InputArtist" : <InputArtist />
+            "Home" : <Home />,
+            "InputArtist" : <InputArtist />,
+            "ArtistPage" : <ArtistPage />
         };
         this.loadPage = this.loadPage.bind(this);
         this.backend = new BackendAPI();
@@ -33,13 +35,20 @@ class App extends Component {
         return (
             <div>
                 <div>
-                    <button>
+                    <button
+                        name="Home"
+                        onClick={this.loadPage}>
                         Home
                     </button>
                     <button
                         name="InputArtist"
                         onClick={this.loadPage}>
                         Add Artist
+                    </button>
+                    <button
+                        name="ArtistPage"
+                        onClick={this.loadPage}>
+                        Artist Page
                     </button>
                 </div>
                 {this.state.page}

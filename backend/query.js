@@ -13,11 +13,7 @@ exports.myQuery = class Query {
         });
     }
 
-    getQuery(callback) {
-        var sql = `
-            SELECT * FROM artists;
-        `;
-
+    getQuery(sql, callback) {
         this.con.query(sql, function(err, result) {
             if (err) throw err;
             return callback(result);

@@ -20,8 +20,8 @@ class BackendAPI {
             headers:{
                 'Content-type': 'application/json'
             }
-        }).then(res => res.json())
-        .then(response => console.log('Success:', JSON.stringify(response)))
+        })
+        .then(response => response.json())
         .catch(error => console.log('Error:', error));
     }
 
