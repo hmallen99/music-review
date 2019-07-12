@@ -14,13 +14,9 @@ class Artist extends Component {
         const info = this.props.info;
         return (
             <div>
-                <button>
-                    <ul>
-                        <li>{info.artistName}</li>
-                        <li>{info.birthday}</li>
-                        <li>{info.location}</li>
-                    </ul>
-                </button>
+                <h2>{info.artistName}</h2>
+                <h3>{info.location}</h3>
+                <h4>{info.birthday}</h4>
             </div>
         );
     }

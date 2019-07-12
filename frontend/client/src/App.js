@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import BackendAPI from './BackendAPI';
@@ -31,9 +32,40 @@ class App extends Component {
         console.log('mounted!');
     }
 
+    goToHome() {
+        return <Home/>;
+    }
+
+    goToInputArtist() {
+        return <InputArtist/>;
+    }
+
+    goToArtist() {
+        return <ArtistPage/>;
+    }
+
     render() {
         return (
-            <div>
+            <Router>
+                <div>
+                    <Link to="/">
+                        <button>Home</button>
+                    </Link>
+
+                    <Link to="/input_artist">
+                        <button>Add Artist</button>
+                    </Link>
+
+                    <Link to="/artist">
+                        <button>Artist</button>
+                    </Link>
+
+                    <Route path="/artist" component={this.goToArtist} />
+                    <Route path="/input_artist" component={this.goToInputArtist} />
+                    <Route exact path="/" component={this.goToHome} />
+                </div>
+            </Router>
+            /*<div>
                 <div>
                     <button
                         name="Home"
@@ -52,7 +84,7 @@ class App extends Component {
                     </button>
                 </div>
                 {this.state.page}
-            </div>
+            </div>*/
         );
     }
 }
