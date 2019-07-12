@@ -74,15 +74,15 @@ class ArtistPage extends Component {
             var info = {
                 artistName : response[i]["artist_name"],
                 birthday : response[i]["birthday"],
-                location : response[i]["location"]
+                location : response[i]["location"],
+                avgRating : response[i]["avg_rating"],
+                numRating : response[i]["num_rating"],
+                bio : response[i]["bio"]
             };
 
-            //alert(artist, bday, location);
             artistList.push(this.renderArtist(info));
-            //alert(artistList.length);
         }
         this.setState({artists : artistList});
-        //return artistList;
     }
 
     render() {

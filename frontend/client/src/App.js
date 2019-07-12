@@ -6,6 +6,7 @@ import BackendAPI from './BackendAPI';
 import Home from './pages/Home';
 import InputArtist from './pages/InputArtist';
 import ArtistPage from './pages/ArtistPage';
+import InputAlbum from './pages/InputAlbum';
 
 class App extends Component {
     constructor(props) {
@@ -44,6 +45,10 @@ class App extends Component {
         return <ArtistPage/>;
     }
 
+    goToInputAlbum() {
+        return <InputAlbum />
+    }
+
     render() {
         return (
             <Router>
@@ -56,35 +61,22 @@ class App extends Component {
                         <button>Add Artist</button>
                     </Link>
 
+                    <Link to="/input_album">
+                        <button>Add Album</button>
+                    </Link>
+
                     <Link to="/artist">
                         <button>Artist</button>
                     </Link>
 
+
+
                     <Route path="/artist" component={this.goToArtist} />
                     <Route path="/input_artist" component={this.goToInputArtist} />
                     <Route exact path="/" component={this.goToHome} />
+                    <Route path="/input_album" component={this.goToInputAlbum} />
                 </div>
             </Router>
-            /*<div>
-                <div>
-                    <button
-                        name="Home"
-                        onClick={this.loadPage}>
-                        Home
-                    </button>
-                    <button
-                        name="InputArtist"
-                        onClick={this.loadPage}>
-                        Add Artist
-                    </button>
-                    <button
-                        name="ArtistPage"
-                        onClick={this.loadPage}>
-                        Artist Page
-                    </button>
-                </div>
-                {this.state.page}
-            </div>*/
         );
     }
 }

@@ -19,6 +19,8 @@
     location VARCHAR(255) NOT NULL,
     avg_rating FLOAT,
     num_rating INT,
+    bio TEXT,
+    albums JSON,
     PRIMARY KEY (artist_id)
 );`
 */

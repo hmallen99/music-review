@@ -49,6 +49,7 @@ app.post('/search_artists', function (req, res) {
     var sql = `
         SELECT * FROM artists
         WHERE artist_name LIKE '%` + search + `%'
+        LIMIT 20;
     `;
     sqlServer.getQuery(
         sql,
