@@ -21,6 +21,7 @@ class Artist extends Component {
                 <h2>{info.artistName}</h2>
                 <h3>{info.location}</h3>
                 <h4>{info.birthday}</h4>
+                <h4>{info.id}</h4>
                 <p>Average Rating: {info.avgRating} <br/></p>
                 <p>Number Of Ratings: {info.numRating} <br/></p>
                 <p>Bio: {bio} <br/></p>

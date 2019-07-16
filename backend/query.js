@@ -20,14 +20,6 @@ exports.myQuery = class Query {
         });
     }
 
-    deleteColumn(callback) {
-        var sql = 'DELETE FROM artists';
-        this.con.query(sql, function(err, result) {
-            if (err) throw err;
-            return callback(result);
-        })
-    }
-
     addArtist(artistName, birthday, location) {
         var artistInsertColumns = `INSERT INTO artists(
             artist_name,
@@ -47,16 +39,18 @@ exports.myQuery = class Query {
         });
     }
 
-    addAlbum(albumName, artistName, releaseDate) {
+    addAlbum(albumName, artistName, releaseDate, artistId) {
         var albumInsertColumns = `Insert INTO albums(
             album_name,
             artist_name,
-            release_date
+            release_date,
+            artist_id
         )`;
         var albumInsertValues = `Values (`.concat(
             '"', albumName, '",',
             '"', artistName, '",',
-            '"', releaseDate, '"',
+            '"', releaseDate, '",',
+            '"', artistId, '"',
             ');'
         );
         var albumInsertQuery = albumInsertColumns.concat(albumInsertValues);

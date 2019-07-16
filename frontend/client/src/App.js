@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import InputArtist from './pages/InputArtist';
 import ArtistPage from './pages/ArtistPage';
 import InputAlbum from './pages/InputAlbum';
+import AlbumPage from './pages/AlbumPage';
 
 class App extends Component {
     constructor(props) {
@@ -49,6 +50,10 @@ class App extends Component {
         return <InputAlbum />
     }
 
+    goToAlbum() {
+        return <AlbumPage />
+    }
+
     render() {
         return (
             <Router>
@@ -69,12 +74,17 @@ class App extends Component {
                         <button>Artist</button>
                     </Link>
 
+                    <Link to="/album">
+                        <button>Album</button>
+                    </Link>
+
 
 
                     <Route path="/artist" component={this.goToArtist} />
                     <Route path="/input_artist" component={this.goToInputArtist} />
                     <Route exact path="/" component={this.goToHome} />
                     <Route path="/input_album" component={this.goToInputAlbum} />
+                    <Route path="/album" component={this.goToAlbum} />
                 </div>
             </Router>
         );

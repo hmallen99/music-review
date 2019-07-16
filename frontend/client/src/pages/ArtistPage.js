@@ -72,6 +72,7 @@ class ArtistPage extends Component {
         var response = JSON.parse(this.state.apiResponse);
         for (var i = 0; i < response.length; i++) {
             var info = {
+                id : response[i]["artist_id"],
                 artistName : response[i]["artist_name"],
                 birthday : response[i]["birthday"],
                 location : response[i]["location"],
